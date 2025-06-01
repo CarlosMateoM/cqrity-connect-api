@@ -11,8 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
 
-    Route::post('login', [AuthController::class, 'login'])
-        ->middleware(IsUserEnabledMiddleware::class);
+    Route::post('login', [AuthController::class, 'login']);
 
     Route::middleware([
         'auth:sanctum',
@@ -22,7 +21,7 @@ Route::prefix('v1')->group(function () {
         Route::get('/user', function (Request $request) {
             return $request->user();
         });
-        
+
         Route::apiResource('users', UserController::class);
         Route::apiResource('access-logs', AccessLogController::class);
         Route::apiResource('access-requests', AccessRequestController::class);

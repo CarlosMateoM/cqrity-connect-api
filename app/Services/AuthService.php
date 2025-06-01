@@ -18,6 +18,12 @@ class AuthService
             ]);
         }
 
+        if(!$user->is_active) {
+            throw ValidationException::withMessages([
+                'email' => ['El usuario no está activo.'],
+            ]);
+        }
+
         if (!Auth::attempt($data)) {
 
             throw ValidationException::withMessages([
