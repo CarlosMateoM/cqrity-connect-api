@@ -17,12 +17,7 @@ class IsUserEnabledMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $user = $request->user();
-
-        Log::info('Checking if user is enabled', [
-            'user_id' => $user->id,
-            'is_active' => $user->is_active,
-        ]);
-
+        
         if (!$user->is_active) {
 
             return response()->json([

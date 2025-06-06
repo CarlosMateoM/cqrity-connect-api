@@ -16,11 +16,17 @@ class UserResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'uuid' => $this->uuid,
             'name' => $this->name,
             'email' => $this->email,
+            'image' => $this->image,
+            'isActive' => $this->is_active,
             'accessLogsCount' => $this->whenNotNull($this->accessLogsCount),
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,
+            'roles' => $this->whenLoaded('roles', function () {
+                return $this->roles->pluck('name');
+            }),
         ];
     }
 }

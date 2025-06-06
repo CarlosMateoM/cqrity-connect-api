@@ -5,6 +5,7 @@ use App\Http\Controllers\AccessRequestController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsUserEnabledMiddleware;
+use App\Http\Resources\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,12 @@ Route::prefix('v1')->group(function () {
     ])->group(function () {
 
         Route::get('/user', function (Request $request) {
-            return $request->user();
+
+            $user = $request->user();
+
+            $user->load('roles');
+
+            return  ($user);
         });
 
         Route::apiResource('users', UserController::class);

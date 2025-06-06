@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateAccessLogRequest;
 use App\Http\Resources\AccessLogResource;
 use App\Models\AccessLog;
 use App\Services\AccessLogService;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class AccessLogController extends Controller
@@ -19,9 +20,9 @@ class AccessLogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResource
+    public function index(Request $request): JsonResource
     {
-        $accessLogs = $this->accessLogService->getAccessLogs();
+        $accessLogs = $this->accessLogService->getAccessLogs($request->user());
 
         return AccessLogResource::collection(resource: $accessLogs);
     }

@@ -3,7 +3,10 @@
 namespace App\Services;
 
 use App\Models\AccessLog;
+use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Auth;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class AccessLogService
@@ -13,12 +16,23 @@ class AccessLogService
     ) {}
 
 
-    public function getAccessLogs(): LengthAwarePaginator
+    public function getAccessLogs(User $user): LengthAwarePaginator
     {
-        return QueryBuilder::for(AccessLog::class)
-            ->allowedFilters(['user_id', 'ip_address'])
+        $query = QueryBuilder::for(AccessLog::class)
+            ->allowedFilters([
+                AllowedFilter::partial('userName', 'user.name'),
+                AllowedFilter::partial('createdAt', 'created_at'),
+                'method'])
             ->allowedSorts(['created_at'])
-            ->paginate(10);
+            ->allowedIncludes(['user'])
+            ->orderBy('created_at', 'desc');
+
+        if ($user->hasRole('user')) {
+            $query->where('user_id', $user->id);
+        }
+
+
+        return $query->paginate(10);
     }
 
     public function getAccessLogById(int $id): AccessLog

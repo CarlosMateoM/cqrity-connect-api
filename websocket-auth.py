@@ -6,11 +6,16 @@ import time
 
 class ESP8266Simulator:
     def __init__(self):
-        self.uri = "ws://192.168.164.200:8080/app/njy8gii5tqlnr8ofoxz3"
+        #self.uri = "ws://192.168.164.200:8080/app/njy8gii5tqlnr8ofoxz3"
+        #self.channel = "private-rfid.register"
+        #self.auth_url = "http://192.168.164.200:8001/api/v1/broadcasting/auth"  
+
+        self.uri = "wss://api.cqrity-connect.site/app/njy8gii5tqlnr8ofoxz3"
         self.channel = "private-rfid.register"
-        self.auth_url = "http://192.168.164.200:8001/api/v1/broadcasting/auth"  # Ajusta esto si estás en producción
+        self.auth_url = "https://api.cqrity-connect.site/api/v1/broadcasting/auth"  
         self.headers = {
-            "Authorization": "Bearer 1|dPDQJy2hNpU7vaCEZK4sdan5WjUZ7xdrgKd1VrG5eb80cf1b",  # Reemplaza por el token válido
+            #"Authorization": "Bearer 1|dPDQJy2hNpU7vaCEZK4sdan5WjUZ7xdrgKd1VrG5eb80cf1b", 
+            "Authorization": "Bearer 1|16UtrOLTqbWK1ktxiALpqn7OI1BDrS8ku1iIT8Ree76521df", 
             "Accept": "application/json"
         }
 

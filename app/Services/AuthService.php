@@ -31,15 +31,11 @@ class AuthService
             ]);
         }
 
-        $user->tokens()->delete();
-
         return $user->createToken('auth_token')->plainTextToken;
     }
 
-    public function logout(): void
+    public function logout(User $user): void
     {
-        $user = User::find(Auth::id());
-
         $user->currentAccessToken()->delete();
     }
 }

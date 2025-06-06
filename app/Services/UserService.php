@@ -26,16 +26,18 @@ class UserService
 
     public function getUserById(int $id): User
     {
-        return User::findOrFail($id);
+        return User::findOrFail($id)->load('roles');
     }
 
     public function createUser(array $data): User
     {
         $user = new User();
 
-        $user->name = $data['name'];
-        $user->email = $data['email'];
+        $user->name     = $data['name'];
+        $user->email    = $data['email'];
         $user->password =  $data['password'];
+        $user->uuid     = $data['uuid'];
+        $user->is_active = $data['isActive'] ?? true;
 
         if (isset($data['image'])) {
 
@@ -53,8 +55,11 @@ class UserService
     {
         $user = $this->getUserById($id);
 
-        $user->name     =   $data['name'] ?? $user->name;
-        $user->email    =   $data['email'] ?? $user->email;
+
+        $user->is_active    =   $data['isActive'] ?? $user->is_active;
+        $user->name         =   $data['name'] ?? $user->name;
+        $user->email        =   $data['email'] ?? $user->email;
+        $user->uuid         =   $data['uuid'] ?? $user->uuid;
 
         if (isset($data['password'])) {
             $user->password = bcrypt($data['password']);
