@@ -24,7 +24,7 @@ class StoreAccessLogRequest extends FormRequest
         return [
             'user_id' => 'required|exists:users,id',
             'method' => 'required|in:APP,RFID',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 }
