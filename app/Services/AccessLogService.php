@@ -46,7 +46,7 @@ class AccessLogService
 
         $accessLog->user_id = $data['user_id'];
         $accessLog->method  = $data['method'];
-        $accessLog->image = "https://mateomartinezdev.blob.core.windows.net/vehicle-marketplace/CurGqfkoC6rgD0gIenA7gomhE2U2G6LK8YMe1TTY.jpg?se=3025-06-11T22:58:44Z&sv=2024-08-04&sr=b&sig=wb2Fb9YWZC0ufkGflWcx89J9mIXFR6dR7jip4t63t4A%3D&sp=r";
+        $accessLog->image = "https://mateomartinezdev.blob.core.windows.net/vehicle-marketplace/WhatsApp Image 2025-06-11 at 5.54.20 PM.jpeg";
 
         /* if (isset($data['image'])) {
 
