@@ -48,10 +48,10 @@ class AccessLogService
         $accessLog->method  = $data['method'];
         $accessLog->image = "https://mateomartinezdev.blob.core.windows.net/vehicle-marketplace/WhatsApp Image 2025-06-11 at 5.54.20 PM.jpeg";
 
-        /* if (isset($data['image'])) {
+         if (isset($data['image'])) {
 
             $accessLog->image = $this->imageService->uploadImage($data['image']);
-        } */
+        }  
 
         $accessLog->save();
 
